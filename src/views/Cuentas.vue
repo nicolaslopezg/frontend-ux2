@@ -1,24 +1,7 @@
 <template>
 <div>
     <v-app>
-    <v-app-bar app color="#FFEFD2">
-      <v-app-bar-nav-icon @click = "drawer = !drawer"></v-app-bar-nav-icon>
-
-        
-        <v-btn text to="/">Devance</v-btn>
-
-        <v-spacer>
-  
-        <v-btn text to="/cuenta/2">Mi cuenta</v-btn>
-
-        <v-btn text to="/factura/2">Mis Facturas</v-btn>
-
-        <v-btn text to="/pago/2">Realizar Pago</v-btn>
-
-        </v-spacer>
-
-        <v-btn to ="/login" class="error">Salir</v-btn>
-    </v-app-bar>
+    <Navbar></Navbar>
     <v-navigation-drawer app v-model="drawer">
     <v-layout mt-4 column align-center>
       <v-flex>
@@ -111,10 +94,14 @@
 </template>
 
 <script>
+import Navbar from "@/components/Navbar"
+
 
 export default {
     name: 'Cuenta',
-    
+    components: {
+    Navbar,
+    },
     data () {
         return{
             users: []
