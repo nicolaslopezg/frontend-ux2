@@ -2,18 +2,7 @@
 <div>
     <v-app>
     <Navbar></Navbar>
-    <v-navigation-drawer app v-model="drawer">
-    <v-layout mt-4 column align-center>
-      <v-flex>
-        <v-avatar>
-          <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="">
-        </v-avatar>
-      </v-flex>
-      <v-flex>
-        <p class="mt-3 headline"> Nicolás López</p>
-      </v-flex>
-    </v-layout>
-  </v-navigation-drawer>
+ 
 
 
  <div v-for="user in users" :key="user.id">
