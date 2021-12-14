@@ -20,7 +20,7 @@
     <v-layout justify-center>
       <v-flex xs6>
         <div class="text-xs-center">
-          <v-col col="12" style="background-color:#FFEFD2;" 
+          <v-col col="12" style="background-color:#2F2F2F;" 
           max-width="1000" 
           max-height="1000">
             <v-form
@@ -28,14 +28,18 @@
             lazy-validation
                                                   
             >
-            <v-text-field
+            <v-textarea
+            class="custom-label-color"
             label="RUT Destinatario"
+            color="white"
             required
-            ></v-text-field>
-            <v-text-field
+            ></v-textarea>
+            <v-textarea
+            class="custom-label-color"
             label="Monto a Pagar"
+            color="white"
             required
-            ></v-text-field>
+            ></v-textarea>
             
 
             <v-btn
