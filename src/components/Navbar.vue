@@ -10,9 +10,9 @@
 
         <v-btn class="white--text" text to="/cuenta/2">Mi cuenta</v-btn>
 
-        <v-btn class="white--text" text to="/factura/2">Mis Facturas</v-btn>
-
         <v-btn class="white--text" text to="/pago/2">Realizar Pago</v-btn>
+
+         <v-btn class="white--text" text to="/chat/2">Chats</v-btn>
 
         </v-spacer>
 

@@ -5,6 +5,7 @@ import Inicio from '../views/Inicio.vue'
 import Cuenta from '../views/Cuentas.vue'
 import Factura from '../views/Transferencias.vue'
 import Pago from '../views/Pagos.vue'
+import Chat from '../views/Chat.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/pago/:id',
     name: 'Pagos',
     component: Pago
+  },
+  {
+    path: '/chat/:id',
+    name: 'Chats',
+    component: Chat
   }
 ]
 
