@@ -28,29 +28,79 @@
             lazy-validation
                                                   
             >
+            <v-combobox
+            v-model="select"
+            :items="items"
+            label="Cuenta de Origen"
+            required
+            ></v-combobox>
+
             <v-text-field
-            label="RUT Destinatario"
+            label="Cuenta de Destino"
             required
             ></v-text-field>
+
             <v-text-field
             label="Monto a Pagar"
             required
             ></v-text-field>
             
+            <v-menu
+              ref="menu"
+              v-model="menu"
+              :close-on-content-click="false"
+              :return-value.sync="date"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="date"
+                  label="Fecha de vencimiento"
+                  required
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="date"
+                no-title
+                scrollable
+              >
+                <v-spacer></v-spacer>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="menu = false"
+                >
+                  Cancel
+                </v-btn>
+                <v-btn
+                  text
+                  color="primary"
+                  @click="$refs.menu.save(date)"
+                >
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-menu>
 
             <v-btn
             color="success"
             class="mr-4"
             @click="addFactura"
             >
-            Pagar
+            Enviar Solicitud
             </v-btn>
             <v-btn
             color="error"
             class="mr-4"
             @click="reset"
             >
-            Volver
+            Cancelar
             </v-btn>
             
           </v-form>
@@ -73,10 +123,8 @@
 </template>
 
 <script>
-
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
-
 export default {
   name: 'Home',
   data: () => ({
@@ -85,8 +133,9 @@ export default {
   components: {
     Navbar,
     Footer,
-  }
+  },
 };
+
 /*
 export default {
     data(){
@@ -99,7 +148,6 @@ export default {
         }
     }
     },
-
     methods: {
         submit(){
             axios.post('http://localhost:3000/User2', this.tranfers)
