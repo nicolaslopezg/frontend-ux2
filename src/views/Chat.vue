@@ -26,20 +26,26 @@
           <table class="default">
             <tr>
                 <td>
-                    <p style="color:white">Chat Cuenta 1</p>
+                    <p style="color:white"><b>
+                        <img src="../assets/Chats.png"
+                        width="30"
+                        height="30">
+                        Chat Cuenta 1
+                        </b></p>
                 </td>
                 <td>
-                    <p style="color:white">Chat Cuentas</p>
+                    <p style="color:white">
+                        Chat Cuentas
+                        <img src="../assets/Mensajes.png"
+                        width="30"
+                        height="30">
+                        </p>
                 </td>
             </tr>
             <tr>
                 <td>
-                     <v-textarea
-                        class="custom-label-color"
-                        label="RUT Destinatario"
-                        color="white"
-                        required>
-                        </v-textarea>
+                     <v-textarea>
+                     </v-textarea>
                 </td>
                 <td>Cuentas</td>
             </tr>
@@ -51,7 +57,9 @@
                         class="mr-4"
                         @click="reset"
                     >
-                    Enviar
+                    <img src="../assets/Enviar.png"
+                        width="30"
+                        height="30">
                     </v-btn>
                 </td>
             </tr>
