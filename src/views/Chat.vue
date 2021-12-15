@@ -23,39 +23,43 @@
           <v-col col="12" style="background-color:#2F2F2F;" 
           max-width="1000" 
           max-height="1000">
+          <table class="default">
+            <tr>
+                <td>
+                    <p style="color:white">Chat Cuenta 1</p>
+                </td>
+                <td>
+                    <p style="color:white">Chat Cuentas</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                     <v-textarea
+                        class="custom-label-color"
+                        label="RUT Destinatario"
+                        color="white"
+                        required>
+                        </v-textarea>
+                </td>
+                <td>Cuentas</td>
+            </tr>
+            <tr>
+                <td>
+                    <input v-model="message" placeholder="Escribe un mensaje aquí">
+                    <v-btn
+                        color="#FFC300"
+                        class="mr-4"
+                        @click="reset"
+                    >
+                    Enviar
+                    </v-btn>
+                </td>
+            </tr>
+            </table>
             <v-form
             ref="form"
-            lazy-validation
-                                                  
+            lazy-validation                                                  
             >
-            <v-textarea
-            class="custom-label-color"
-            label="RUT Destinatario"
-            color="white"
-            required
-            ></v-textarea>
-            <v-textarea
-            class="custom-label-color"
-            label="Monto a Pagar"
-            color="white"
-            required
-            ></v-textarea>
-            
-
-            <v-btn
-            color="success"
-            class="mr-4"
-            @click="addFactura"
-            >
-            Pagar
-            </v-btn>
-            <v-btn
-            color="error"
-            class="mr-4"
-            @click="reset"
-            >
-            Volver
-            </v-btn>
             
           </v-form>
         </v-col>
