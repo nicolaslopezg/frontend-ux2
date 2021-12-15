@@ -1,3 +1,9 @@
+img.izquierda {
+  float: left;
+}
+img.derecha {
+  float: right;
+}
 <template>
 <div>
     <v-app>
@@ -20,11 +26,11 @@
     <v-layout justify-center>
       <v-flex xs6>
         <div class="text-xs-center">
-          <v-col col="12" style="background-color:#2F2F2F;" 
+          <v-col col="12" style="background-color:#343330;" 
           max-width="1000" 
           max-height="1000">
-          <table class="default">
-            <tr>
+          <table class="forma1">
+            <tr style="background-color:#5A5A5A">
                 <td>
                     <p style="color:white"><b>
                         <img src="../assets/Chats.png"
@@ -34,11 +40,12 @@
                         </b></p>
                 </td>
                 <td>
-                    <p style="color:white">
+                    <p style="color:white" >
                         Chat Cuentas
                         <img src="../assets/Mensajes.png"
                         width="30"
-                        height="30">
+                        height="30"
+                        class = "derecha">
                         </p>
                 </td>
             </tr>
@@ -51,7 +58,7 @@
             </tr>
             <tr>
                 <td>
-                    <input v-model="message" placeholder="Escribe un mensaje aquí">
+                    <input v-model="message" placeholder="Escribe un mensaje aquí" class = "izquierda">
                     <v-btn
                         color="#FFC300"
                         class="mr-4"
@@ -59,7 +66,8 @@
                     >
                     <img src="../assets/Enviar.png"
                         width="30"
-                        height="30">
+                        height="30"
+                        class = "derecha">
                     </v-btn>
                 </td>
             </tr>
