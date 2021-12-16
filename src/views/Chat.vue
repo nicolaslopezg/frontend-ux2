@@ -1,94 +1,58 @@
-img.izquierda {
-  float: left;
-}
-img.derecha {
-  float: right;
-}
+
 <template>
 <div>
     <v-app>
     <Navbar></Navbar>
-    <v-navigation-drawer app v-model="drawer">
-    <v-layout mt-4 column align-center>
-      <v-flex>
-        <v-avatar>
-          <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="">
-        </v-avatar>
-      </v-flex>
-      <v-flex>
-        <p class="mt-3 headline"> Nicolás López</p>
-      </v-flex>
-    </v-layout>
-  </v-navigation-drawer>
-
-<v-content>
-  <v-container fill-height>
-    <v-layout justify-center>
-      <v-flex xs6>
-        <div class="text-xs-center">
-          <v-col col="12" style="background-color:#343330;" 
-          max-width="1000" 
-          max-height="1000">
-          <table class="forma1">
-            <tr style="background-color:#5A5A5A">
-                <td>
-                    <p style="color:white"><b>
-                        <img src="../assets/Chats.png"
-                        width="30"
-                        height="30">
-                        Chat Cuenta 1
-                        </b></p>
-                </td>
-                <td>
-                    <p style="color:white" >
-                        Chat Cuentas
-                        <img src="../assets/Mensajes.png"
-                        width="30"
-                        height="30"
-                        class = "derecha">
-                        </p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                     <v-textarea>
-                     </v-textarea>
-                </td>
-                <td>Cuentas</td>
-            </tr>
-            <tr>
-                <td>
-                    <input v-model="message" placeholder="Escribe un mensaje aquí" class = "izquierda">
-                    <v-btn
-                        color="#FFC300"
-                        class="mr-4"
-                        @click="reset"
-                    >
-                    <img src="../assets/Enviar.png"
-                        width="30"
-                        height="30"
-                        class = "derecha">
-                    </v-btn>
-                </td>
-            </tr>
-            </table>
-            <v-form
-            ref="form"
-            lazy-validation                                                  
-            >
-            
-          </v-form>
-        </v-col>
-      </div>
-    </v-flex>
-  </v-layout>
-</v-container>
-</v-content>
-
+    
 
 
     <v-content>
-      <router-view/>
+      <v-card class="elevation-12" color="#D8D8D7">
+      </v-card>
+       <v-container fill-height>
+       <v-row class="d-flex justify-center align-center">
+        <v-col cols="10">
+        <v-card class="elevation-12" color="#D8D8D7">
+          
+            <v-toolbar dark color="#343330">
+              <v-toolbar-title>Chat</v-toolbar-title>
+            </v-toolbar>
+          
+          <v-row>
+            <v-col>
+              <v-card-text>
+                <v-list ref="chat" id="logs" :style="{minHeight: '200px'}">
+                  <template v-for="(mensaje, index) in logs" >
+                    <v-subheader v-if="mensaje" :key="index">{{mensaje.text}}</v-subheader>
+                  </template>
+                </v-list>
+              </v-card-text>
+              <v-card-actions>
+                <v-form @submit.prevent="submit" :style="{width: '100%'}">
+                <v-container>
+                  <v-row>
+                    <v-col align-self="right" justify="right" cols="11">
+                      <v-text-field v-model="msg"  label="Mensaje" single-line solo-inverted></v-text-field>
+                    </v-col>
+                    <v-col cols="1"  align-self="right" justify="end">
+                      <v-btn @click="setUser" :style="{width: '50px', height: '50px', 'margin-left': '30px'}" fab dark small color="primary" type="submit">
+                        <v-icon  :style="{fontSize: '25px'}" dark>mdi-send</v-icon>
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                  <v-row class="d-flex justify-center caption">
+                    <v-icon color="red" :style="{fontSize: '15px'}"  dark>mdi-circle</v-icon>
+                    Chat en vivo
+                  </v-row>
+                </v-container>
+                  </v-form>
+              </v-card-actions>
+            </v-col>
+          </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
     </v-content>
 
       <Footer></Footer>
@@ -100,37 +64,72 @@ img.derecha {
 
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import { doc, getDoc, onSnapshot, query, collection, setDoc} from "firebase/firestore";
+import{db} from "../main.js";
 
 export default {
   name: 'Home',
   data: () => ({
     drawer: false,
+    logs: [],
+    texto: [],
+    msg: null,
+    user: [],
   }),
+  mounted(){
+        this.url_data=this.$route.params.id;
+    },
+    created() {
+      this.loadUser()
+      this.leerChat()
+    },
   components: {
     Navbar,
     Footer,
-  }
-};
-/*
-export default {
-    data(){
-        return {
-          tranfers: {
-            form: {
-                amount: '',
-                idDestino: ''
-            }
-        }
+  },
+  methods: {
+    submit() {
+      this.logs.push(this.msg);
+      this.msg = "";
+    },
+    async loadUser() {
+    const userRef = doc(db, "users/"+this.$route.params.id); 
+    try {
+      const loadedUser = await getDoc(userRef);
+      if (loadedUser !== null) {
+        this.user = loadedUser.data(); 
+        console.log(this.user);
+      }
+    } catch (error) {
+      console.log(error);
     }
     },
+  leerChat() {
+    const q = query(
+      collection(db, "chats")
+    );
+    onSnapshot(q, (querySnapshot) => {
+      let mensajes = [];
+      querySnapshot.forEach((doc) => {
+        mensajes.push(doc.data())
+      });
+      this.logs=mensajes
+      console.log(mensajes)
+    })},
 
-    methods: {
-        submit(){
-            axios.post('http://localhost:3000/User2', this.tranfers)
-                .then(function( response ){
-                    // Handle success
-                }.bind(this));
-        }
+  async setUser(){
+    await setDoc(doc(db, "chats/"+this.logs.length+1), {
+    text: this.user.name+": " + this.msg,
+    });
+  },
+    
+  },
+  watch: {
+    logs() {
+      setTimeout(() => {
+        this.$refs.chat.$el.scrollTop = this.$refs.chat.$el.scrollHeight;
+      }, 0);
     }
-}*/
+  }
+};
 </script>
