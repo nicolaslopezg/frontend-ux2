@@ -9,11 +9,6 @@
       <router-view/>
     </v-content>
 
-    <v-btn class="ma-10" @click="loadUser" >Hola</v-btn>
-    <v-btn class="ma-10" @click="setUser" >Guardar</v-btn>
-    {{texto}}
-    <v-btn class="ma-10" @click="leerDatos" >Leer</v-btn>
-
 
     <Footer></Footer>
     

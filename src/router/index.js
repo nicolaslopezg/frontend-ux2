@@ -26,12 +26,12 @@ const routes = [
     component: Cuenta
   },
   {
-    path: '/factura/:id',
+    path: '/Transferencias/:id',
     name: 'Facturas',
     component: Factura
   },
   {
-    path: '/pago/:id',
+    path: '/realizarTransferencia/:id',
     name: 'Pagos',
     component: Pago
   },

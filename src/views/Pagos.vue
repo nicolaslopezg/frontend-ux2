@@ -26,10 +26,13 @@
             <v-form
             ref="form"
             lazy-validation
-                                                  
             >
+            <h2 style="textAlign: center"> 
+            Solicitar Transferencia
+            </h2>    
+
             <v-combobox
-            v-model="select"
+            v-model="origen"
             :items="items"
             label="Cuenta de Origen"
             required
@@ -37,11 +40,13 @@
 
             <v-text-field
             label="Cuenta de Destino"
+            v-model="destino"
             required
             ></v-text-field>
 
             <v-text-field
             label="Monto a Pagar"
+            v-model="monto"
             required
             ></v-text-field>
             
@@ -88,10 +93,11 @@
               </v-date-picker>
             </v-menu>
 
+            <h3 style="textAlign: center">
             <v-btn
             color="success"
             class="mr-4"
-            @click="addFactura"
+            @click="createTransfer"
             >
             Enviar Solicitud
             </v-btn>
@@ -102,6 +108,7 @@
             >
             Cancelar
             </v-btn>
+            </h3>
             
           </v-form>
         </v-col>
@@ -110,8 +117,6 @@
   </v-layout>
 </v-container>
 </v-content>
-
-
 
     <v-content>
       <router-view/>
@@ -125,15 +130,93 @@
 <script>
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import { doc, getDoc, setDoc, onSnapshot } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import{db} from "../main.js";
+
 export default {
   name: 'Home',
   data: () => ({
     drawer: false,
+    origen: null,
+    destino: null,
+    monto: null,
+    date: null,
+    idDestino: null,
+    items: [
+      {value: 'corriente', text: 'Cuenta Corriente'},
+      {value: 'tiempo', text: 'Cuenta Tiempo'}
+    ],
   }),
   components: {
     Navbar,
     Footer,
   },
+  methods:{
+
+    async loadAccount() {
+      console.log(this.origen.value);
+      console.log(this.destino);
+      console.log(this.monto);
+      console.log(this.date);
+    const q = query(collection(db, "accounts"), where("accountNumber", "==", parseInt(this.destino)));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+    });
+    },
+    async createTransfer() {
+    /*  const q = query(collection(db, "accounts"), where("accountNumber", "==", parseInt(this.destino)));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        this.idDestino = parseInt(doc.id);
+        console.log(doc.id, " => ", doc.data());
+      });*/
+      console.log(this.origen.value);
+      console.log(this.destino);
+      console.log(this.monto);
+      console.log(this.date);
+      await setDoc(doc(db, "transfers","80"), {
+      acceptaceNumber: 0,
+      acceptanceStatus: "rechazado",
+      accountType: this.origen.value,
+      balance: parseInt(this.monto),
+      date: this.date,
+      accountDestiny: parseInt(this.destino),
+      idUserOrigin: 1,
+      transferStatus: "pendiente",
+      });
+    
+    },
+
+    async loadUser() {
+    const userRef = doc(db, "users/1");
+    try {
+      const loadedUser = await getDoc(userRef);
+      if (loadedUser !== null) {
+        const {
+          name,
+        } = loadedUser.data();
+        console.log(name);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    },
+    async setUser(){
+      await setDoc(doc(db, "users","US"), {
+      name: "Los Angeles",
+    });
+      },
+    async leerDatos(){
+      onSnapshot(doc(db, "users", "LA"), (doc) => {
+        this.texto=doc.data().name;
+      console.log("Current data: ", doc.data());
+      });
+    }
+  }
 };
 
 /*

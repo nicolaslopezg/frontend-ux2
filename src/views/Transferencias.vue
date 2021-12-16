@@ -4,56 +4,95 @@
     <Navbar></Navbar>
 
 
- <div v-for="user in users" :key="user.id">
-     <div v-if="user.id == url_data">
-         <div v-for="tranfer in user.tranfers" :key="tranfer.id">
-            <v-content>
-                <v-container fill-height>
-                    <v-layout justify-start>
-                        <v-flex xs6>
-                            <div class="text-xs-center">
-                                <v-col col="12">
-                                    <v-card
-                                        class="mx-auto"
-                                        max-width="1000"
-                                        outlined>
-                                        <v-list-item three-line>
-                                        <v-list-item-content>
-                                            <div class="text-overline mb-4">
-                                            Destinatario: {{tranfer.idDestino}}
-                                            </div>
-                                            <v-list-item-title class="text-h5 mb-1">
-                                            Monto tranferencia: ${{tranfer.amount}}
-                                            </v-list-item-title>
-                                            <v-list-item-subtitle>Comprobante de factura</v-list-item-subtitle>
-                                        </v-list-item-content>
+<v-content>
+  <v-container fill-height>
+    <v-layout justify-center>
+      <v-flex xs6>
+        <div class="text-xs-center">
+          <v-col col="12" style="background-color:#FFEFD2;" 
+          max-width="1000" 
+          max-height="1000">
+            <v-form
+            ref="form"
+            lazy-validation                                      
+            >
+            <h2 style="textAlign: center">    
+                Transferencias Finalizadas
+            </h2>
+            <div v-for="(transaction,index) in obtenerFinalizados" :key="index">
+            <h3>
+                Tipo Cuenta: {{transaction.accountType}}
+            </h3>
+            <h3>
+                Número Cuenta Destino: {{transaction.accountDestiny}}
+            </h3> 
+            <h3>
+                Monto:  {{transaction.balance}}
+            </h3>
+            <h3>
+                Estado: {{transaction.acceptanceStatus}}
+            </h3>
+            </div>
+            
+          </v-form>
+        </v-col>
+      </div>
+    </v-flex>
+    <v-flex class="ml-5" xs6>
+        <div class="text-xs-center">
+          <v-col col="12" style="background-color:#FFEFD2;" 
+          max-width="1000" 
+          max-height="1000">
+            <v-form
+            ref="form"
+            lazy-validation                                      
+            >
+            
+            <h2 style="textAlign: center">    
+                Transferencias Pendientes
+            </h2>
+            <div v-for="(transaction,index) in obtenerPendientes" :key="index">
+                
+            <h3>
+                Tipo Cuenta: {{transaction.accountType}}
+            </h3>
+            <h3>
+                Número Cuenta Destino: {{transaction.accountDestiny}}
+            </h3>
+            <h3>
+                Monto: {{transaction.balance}}
+            </h3>
+            <h3>
+                Fecha Vencimiento: {{transaction.date}}
+            </h3>
+            <h3>
+                Aprobación: {{transaction.acceptaceNumber}} / 3
+            </h3>
 
-                                        <v-list-item-avatar
-                                            tile
-                                            size="80"
-                                            color="grey"
-                                        ></v-list-item-avatar>
-                                        </v-list-item>
-
-                                        <v-card-actions>
-                                        <v-btn
-                                            outlined
-                                            rounded
-                                            text
-                                        >
-                                            Revisar factura
-                                        </v-btn>
-                                        </v-card-actions>
-                                    </v-card>
-                                </v-col>
-                            </div>
-                        </v-flex>
-                    </v-layout>
-                </v-container>
-            </v-content>
-         </div>
-    </div>
- </div>
+            <h3 style="textAlign: center">
+                <v-btn
+            color="error"
+            class="mr-4"
+            >
+            Rechazar
+            </v-btn>
+            <v-btn
+            color="success"
+            class="mr-4"
+            >
+            Aprobar
+            </v-btn>    
+            </h3>
+            </div>
+            
+            
+          </v-form>
+        </v-col>
+      </div>
+    </v-flex>
+  </v-layout>
+</v-container>
+</v-content>
 
 
 
@@ -69,22 +108,61 @@
 <script>
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+
+import { collection, getDocs } from "firebase/firestore";
+import{db} from "../main.js";
 export default {
     name: 'Factura',
     
     data () {
         return{
-            users: []
+            users: [],
+            pendiente: [],
+            transactions: [], 
         }
         
     },
-    mounted(){
-        fetch('http://localhost:3000/User2')
-        .then(res => res.json())
-        .then(data => this.users = data)
-        .catch(err => console.log(err.message))
-        this.url_data=this.$route.params.id;
+    computed: {
+        obtenerFinalizados() {
+        let algo = this.transactions.filter(doc => doc.transferStatus === 'finalizada');
+        console.log("Computed");
+        console.log(algo);
+            return algo;
+        },
+        obtenerPendientes() {
+        let otro = this.transactions.filter(doc => doc.transferStatus === 'pendiente');
+        console.log("Computed");
+        console.log(otro);
+            return otro;
+        }
     },
+    created(){
+        console.log("hola");
+        this.getTransactions();
+    
+        
+    },
+    methods: {
+    async getTransactions() {
+        const querySnapshot = await getDocs(
+            collection(db, "transfers")
+        );
+        try {
+            const loadedTransactions = [];
+            querySnapshot.forEach((doc) => {
+            if (doc !== null) {
+                loadedTransactions.push({ id: doc.id, ...doc.data() });
+
+            }
+            });
+            this.transactions = loadedTransactions;
+            console.log(this.transactions);
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    },
+    
     components: {
     Navbar,
     Footer

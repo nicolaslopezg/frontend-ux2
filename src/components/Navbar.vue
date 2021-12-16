@@ -10,7 +10,9 @@
 
         <v-btn class="white--text" text to="/cuenta/2">Mi cuenta</v-btn>
 
-        <v-btn class="white--text" text to="/pago/2">Realizar Pago</v-btn>
+        <v-btn class="white--text" text to="/transferencias/2">Transferencias</v-btn>
+
+        <v-btn class="white--text" text to="/realizarTransferencia/2">Realizar transferencia</v-btn>
 
          <v-btn class="white--text" text to="/chat/2">Chats</v-btn>
 

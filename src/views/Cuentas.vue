@@ -5,55 +5,64 @@
  
 
 
- <div v-for="user in users" :key="user.id">
-     <div v-if="user.id == url_data">
-         <div v-for="account in user.accounts" :key="account.id">
-            <v-content>
-                <v-container fill-height>
-                    <v-layout justify-start>
-                        <v-flex xs6>
-                            <div class="text-xs-center">
-                                <v-card
-                                    class="mx-auto"
-                                    max-width="1000"
-                                    outlined
-                                >
-                                    <v-list-item three-line>
-                                    <v-list-item-content>
-                                        <div class="text-overline mb-4">
-                                        Tipo de cuenta: {{account.type}}
-                                        </div>
-                                        <v-list-item-title class="text-h5 mb-1">
-                                        Balance: ${{account.balance}}
-                                        </v-list-item-title>
-                                        <v-list-item-subtitle>Este balance corresponde a la cuenta de tu banco</v-list-item-subtitle>
-                                    </v-list-item-content>
+<v-content>
+  <v-container fill-height>
+    <v-layout justify-center>
+      <v-flex xs6>
+        <div class="text-xs-center">
+          <v-col col="12" style="background-color:#FFEFD2;" 
+          max-width="1000" 
+          max-height="1000">
+            <v-form
+            ref="form"
+            lazy-validation                                      
+            >
+            <h2 style="textAlign: center">    
+                Cuenta Corriente
+            </h2>
 
-                                    <v-list-item-avatar
-                                        tile
-                                        size="80"
-                                        color="grey"
-                                    ></v-list-item-avatar>
-                                    </v-list-item>
+            <h3>
+                Número Cuenta: 1000
+            </h3>
 
-                                    <v-card-actions>
-                                    <v-btn
-                                        outlined
-                                        rounded
-                                        text
-                                    >
-                                        Revisar cuenta
-                                    </v-btn>
-                                    </v-card-actions>
-                                </v-card>
-                            </div>
-                        </v-flex>
-                    </v-layout>
-                </v-container>
-            </v-content>
-         </div>
-    </div>
- </div>
+            <h3>
+                Saldo: 1000000
+            </h3>
+            
+            
+          </v-form>
+        </v-col>
+      </div>
+    </v-flex>
+    <v-flex class="ml-5" xs6>
+        <div class="text-xs-center">
+          <v-col col="12" style="background-color:#FFEFD2;" 
+          max-width="1000" 
+          max-height="1000">
+            <v-form
+            ref="form"
+            lazy-validation                                      
+            >
+            <h2 style="textAlign: center">    
+                Cuenta Tiempo
+            </h2>
+
+            <h3>
+                Número Cuenta: 321
+            </h3>
+
+            <h3>
+                Saldo: 6
+            </h3>
+            
+            
+          </v-form>
+        </v-col>
+      </div>
+    </v-flex>
+  </v-layout>
+</v-container>
+</v-content>
 
 
 
@@ -69,6 +78,8 @@
 <script>
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import { collection, getDocs } from "firebase/firestore";
+import{db} from "../main.js";
 
 export default {
     name: 'Cuenta',
@@ -78,16 +89,45 @@ export default {
     },
     data () {
         return{
-            users: []
+            users: [],
+            aux: [],
+            accounts: [],
         }
         
     },
-    mounted(){
-        fetch('http://localhost:3000/User2')
-        .then(res => res.json())
-        .then(data => this.users = data)
-        .catch(err => console.log(err.message))
-        this.url_data=this.$route.params.id;
+    computed: {
+        obtenerCuentas() {
+        let algo = this.accounts.filter(doc => parseInt(doc.idUser) === 1);
+        console.log("Computed");
+        console.log(algo);
+            return algo;
+        },
+    },
+    created(){
+        console.log("hola");
+        this.getAccounts();
+    
+        
+    },
+    methods: {
+    async getAccounts() {
+        const querySnapshot = await getDocs(
+            collection(db, "accounts")
+        );
+        try {
+            const loadedAccounts = [];
+            querySnapshot.forEach((doc) => {
+            if (doc !== null) {
+                loadedAccounts.push({ id: doc.id, ...doc.data() });
+
+            }
+            });
+            this.accounts = loadedAccounts;
+            console.log(this.accounts);
+        } catch (error) {
+            console.log(error);
+        }
+    },
     },
     
   }
