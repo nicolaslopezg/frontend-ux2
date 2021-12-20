@@ -7,12 +7,12 @@
 
 
     <v-content>
-      <v-card class="elevation-12" color="#D8D8D7">
+      <v-card class="elevation-12" color="#FFEFD2">
       </v-card>
        <v-container fill-height>
        <v-row class="d-flex justify-center align-center">
         <v-col cols="10">
-        <v-card class="elevation-12" color="#D8D8D7">
+        <v-card class="elevation-12" color="#FFEFD2">
           
             <v-toolbar dark color="#343330">
               <v-toolbar-title>Chat</v-toolbar-title>
@@ -21,7 +21,7 @@
           <v-row>
             <v-col>
               <v-card-text>
-                <v-list ref="chat" id="logs" :style="{minHeight: '200px'}">
+                <v-list ref="chat" id="logs" color="#f0c895" :style="{minHeight: '200px'}">
                   <template v-for="(mensaje, index) in logs" >
                     <v-subheader v-if="mensaje" :key="index">{{mensaje.text}}</v-subheader>
                   </template>
@@ -35,7 +35,7 @@
                       <v-text-field v-model="msg"  label="Mensaje" single-line solo-inverted></v-text-field>
                     </v-col>
                     <v-col cols="1"  align-self="right" justify="end">
-                      <v-btn @click="setUser" :style="{width: '50px', height: '50px', 'margin-left': '30px'}" fab dark small color="primary" type="submit">
+                      <v-btn @click="setUser" :style="{width: '50px', height: '50px', 'margin-left': '30px'}" fab dark small color="#DC851F" type="submit">
                         <v-icon  :style="{fontSize: '25px'}" dark>mdi-send</v-icon>
                       </v-btn>
                     </v-col>

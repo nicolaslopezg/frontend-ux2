@@ -20,6 +20,8 @@
                 Transferencias Finalizadas
             </h2>
             <div v-for="(transaction,index) in obtenerFinalizados" :key="index">
+            <v-container>
+                <v-card color="#f0c895">
             <h3>
                 Tipo Cuenta: {{transaction.accountType}}
             </h3>
@@ -32,6 +34,8 @@
             <h3>
                 Estado: {{transaction.acceptanceStatus}}
             </h3>
+            </v-card>
+            </v-container>
             </div>
             
           </v-form>
@@ -50,9 +54,10 @@
             
             <h2 style="textAlign: center">    
                 Transferencias Pendientes
-            </h2>
+            </h2> 
             <div v-for="(transaction,index) in obtenerPendientes" :key="index">
-                
+            <v-container>
+                <v-card color="#f0c895">  
             <h3>
                 Tipo Cuenta: {{transaction.accountType}}
             </h3>
@@ -83,8 +88,9 @@
             Aprobar
             </v-btn>    
             </h3>
+                </v-card>
+            </v-container>
             </div>
-            
             
           </v-form>
         </v-col>

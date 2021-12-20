@@ -17,18 +17,21 @@
             ref="form"
             lazy-validation                                      
             >
+            <v-container>
+              <v-card color="#f0c895">
             <h2 style="textAlign: center">    
                 Cuenta Corriente
             </h2>
 
-            <h3>
+            <h3 >
                 Número Cuenta: 1000
             </h3>
 
             <h3>
                 Saldo: 1000000
             </h3>
-            
+              </v-card>
+            </v-container>
             
           </v-form>
         </v-col>
@@ -43,6 +46,8 @@
             ref="form"
             lazy-validation                                      
             >
+            <v-container>
+              <v-card color="#f0c895">
             <h2 style="textAlign: center">    
                 Cuenta Tiempo
             </h2>
@@ -54,6 +59,8 @@
             <h3>
                 Saldo: 6
             </h3>
+              </v-card>
+            </v-container>
             
             
           </v-form>
