@@ -18,7 +18,7 @@
 
         </v-spacer>
 
-        <v-btn color="#DC851F">Salir</v-btn>
+        <v-btn text to ="/login" color="#DC851F">Salir</v-btn>
     </v-app-bar>  
     <v-navigation-drawer app v-model="drawer">
     <v-layout mt-4 column align-center>

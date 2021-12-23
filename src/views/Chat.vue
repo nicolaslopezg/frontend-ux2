@@ -6,43 +6,44 @@
     
 
 
-    <v-content>
-      <v-card class="elevation-12" color="#FFEFD2">
+    <v-content >
+      <v-card class="d-flex justify-center elevation-12" color="#FFEFD2">
       </v-card>
-       <v-container fill-height>
-       <v-row class="d-flex justify-center align-center">
+       <v-container fill-height fill-width >
+       <v-row class="d-flex justify-center align-center ">
         <v-col cols="10">
-        <v-card class="elevation-12" color="#FFEFD2">
+        <v-card class="elevation-12 " color="#343330">
           
-            <v-toolbar dark color="#343330">
-              <v-toolbar-title>Chat</v-toolbar-title>
-            </v-toolbar>
+            
           
-          <v-row>
-            <v-col>
-              <v-card-text>
+          <v-row >
+            <v-col >
+              <v-toolbar dark color="#343330">
+                <v-toolbar-title>Chat</v-toolbar-title>
+              </v-toolbar>
+              <v-card-text class="chatbox">
                 <v-list ref="chat" id="logs" color="#f0c895" :style="{minHeight: '200px'}">
                   <template v-for="(mensaje, index) in logs" >
                     <v-subheader v-if="mensaje" :key="index">{{mensaje.text}}</v-subheader>
                   </template>
                 </v-list>
               </v-card-text>
-              <v-card-actions>
+              <v-card-actions class="chatbox" >
                 <v-form @submit.prevent="submit" :style="{width: '100%'}">
-                <v-container>
-                  <v-row>
+                <v-container >
+                  <v-row align="center" justify="center">
                     <v-col align-self="right" justify="right" cols="11">
-                      <v-text-field v-model="msg"  label="Mensaje" single-line solo-inverted></v-text-field>
+                      <v-text-field :style="{minWidth: '50px',maxWidth:'1500px', height: '50px'}" v-model="msg" dark color="#676765" label="Mensaje" single-line solo-inverted></v-text-field>
                     </v-col>
                     <v-col cols="1"  align-self="right" justify="end">
-                      <v-btn @click="setUser" :style="{width: '50px', height: '50px', 'margin-left': '30px'}" fab dark small color="#DC851F" type="submit">
+                      <v-btn @click="setUser" :style="{width: '50px', height: '50px'}" fab dark small color="#DC851F" type="submit">
                         <v-icon  :style="{fontSize: '25px'}" dark>mdi-send</v-icon>
                       </v-btn>
                     </v-col>
                   </v-row>
                   <v-row class="d-flex justify-center caption">
-                    <v-icon color="red" :style="{fontSize: '15px'}"  dark>mdi-circle</v-icon>
-                    Chat en vivo
+                    <v-icon dark color="red" :style="{fontSize: '15px'}"  >mdi-circle</v-icon>
+                    <h3 class= "text">Chat en vivo</h3>
                   </v-row>
                 </v-container>
                   </v-form>
@@ -133,3 +134,17 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.chatbox{
+  background-color: #343330;
+  
+}
+.text{
+  color: white;
+}
+.elevation-12{
+  /*max-width: 1200px;*/
+
+}
+</style>
