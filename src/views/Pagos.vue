@@ -120,6 +120,7 @@
             color="success"
             class="mr-4 rounded-pill"
             @click="createTransfer"
+            onclick="alert('¡Envío de solicitud realizada!')"
             >
             Enviar Solicitud
             </v-btn>
@@ -127,6 +128,8 @@
             color="error"
             class="mr-4 rounded-pill"
             @click="reset"
+            type="reset"
+            onclick="alert('¡Solicitud de transferencia cancelada!')"
             >
             Cancelar
             </v-btn>
