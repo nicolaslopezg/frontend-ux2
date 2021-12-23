@@ -8,7 +8,7 @@
 <v-content>
   <v-container fill-height>
     <v-layout justify-center>
-      <v-flex xs6>
+      <v-flex xs6 v-for="(account,index) in accounts" :key ="index">
         <div class="text-xs-center">
           <v-col col="12" style="background-color:#FFEFD2;" 
           max-width="1000" 
@@ -20,48 +20,18 @@
             <v-container>
               <v-card color="#f0c895">
             <h2 style="textAlign: center">    
-                Cuenta Corriente
+                Cuenta {{account.accountType}}
             </h2>
 
             <h3 >
-                Número Cuenta: 1000
+                Número Cuenta: {{account.accountNumber}}
             </h3>
 
             <h3>
-                Saldo: 1000000
+                Saldo: {{account.balance}}
             </h3>
               </v-card>
             </v-container>
-            
-          </v-form>
-        </v-col>
-      </div>
-    </v-flex>
-    <v-flex class="ml-5" xs6>
-        <div class="text-xs-center">
-          <v-col col="12" style="background-color:#FFEFD2;" 
-          max-width="1000" 
-          max-height="1000">
-            <v-form
-            ref="form"
-            lazy-validation                                      
-            >
-            <v-container>
-              <v-card color="#f0c895">
-            <h2 style="textAlign: center">    
-                Cuenta Tiempo
-            </h2>
-
-            <h3>
-                Número Cuenta: 321
-            </h3>
-
-            <h3>
-                Saldo: 6
-            </h3>
-              </v-card>
-            </v-container>
-            
             
           </v-form>
         </v-col>
@@ -85,7 +55,7 @@
 <script>
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, where, query} from "firebase/firestore";
 import{db} from "../main.js";
 
 export default {
@@ -102,14 +72,7 @@ export default {
         }
         
     },
-    computed: {
-        obtenerCuentas() {
-        let algo = this.accounts.filter(doc => parseInt(doc.idUser) === 1);
-        console.log("Computed");
-        console.log(algo);
-            return algo;
-        },
-    },
+    
     created(){
         console.log("hola");
         this.getAccounts();
@@ -118,12 +81,15 @@ export default {
     },
     methods: {
     async getAccounts() {
-        const querySnapshot = await getDocs(
-            collection(db, "accounts")
+        const currentUserID = parseInt(this.$route.params.id);
+        console.log(this.$route)
+        const querySnapshot = query(
+            collection(db, "accounts"), where("idUser","==",currentUserID)
         );
         try {
+            const queryAccounts = await getDocs(querySnapshot);
             const loadedAccounts = [];
-            querySnapshot.forEach((doc) => {
+            queryAccounts.forEach((doc) => {
             if (doc !== null) {
                 loadedAccounts.push({ id: doc.id, ...doc.data() });
 
