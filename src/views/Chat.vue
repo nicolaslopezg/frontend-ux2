@@ -19,7 +19,11 @@
           <v-row >
             <v-col >
               <v-toolbar dark color="#343330">
-                <v-toolbar-title>Chat</v-toolbar-title>
+                <v-toolbar-title>
+                  <h2 style="textAlign: center"> 
+                 Chat
+                </h2>
+                </v-toolbar-title>
               </v-toolbar>
               <v-card-text class="chatbox">
                 <v-list ref="chat" id="logs" color="#f0c895" :style="{minHeight: '200px'}">

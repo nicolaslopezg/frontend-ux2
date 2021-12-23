@@ -119,9 +119,66 @@
                                 <h4>{{transaction.date}}</h4>
                             </v-col>
                         </v-toolbar>
-
+                            </v-row>
+                            <v-row no-gutters>
+                                <v-toolbar color="#f0c895">
+                                    <h4>Aprobaciones: {{transaction.acceptaceNumber}} / 3
+                                    </h4>
+                                    <v-col align="right">
+                                    <v-btn
+                                        color="error"
+                                        class="mr-4"
+                                        >
+                                        Rechazar
+                                    </v-btn>
+                                    <v-btn
+                                        color="success"
+                                        class="mr-4"
+                                        >
+                                        Aprobar
+                                    </v-btn>   
+                                    </v-col>
+                                </v-toolbar>
                             </v-row>
                     </v-container>
+
+
+            <!--
+            <v-container>
+                <v-card color="#f0c895">  
+            <h3>
+                Tipo Cuenta: {{transaction.accountType}}
+            </h3>
+            <h3>
+                Número Cuenta Destino: {{transaction.accountDestiny}}
+            </h3>
+            <h3>
+                Monto: {{transaction.balance}}
+            </h3>
+            <h3>
+                Fecha Vencimiento: {{transaction.date}}
+            </h3>
+            <h3>
+                Aprobación: {{transaction.acceptaceNumber}} / 3
+            </h3>
+
+            <h3 style="textAlign: center">
+                <v-btn
+            color="error"
+            class="mr-4"
+            >
+            Rechazar
+            </v-btn>
+            <v-btn
+            color="success"
+            class="mr-4"
+            >
+            Aprobar
+            </v-btn>    
+            </h3>
+                </v-card>
+            </v-container>
+-->
             </div>
             
           </v-form>

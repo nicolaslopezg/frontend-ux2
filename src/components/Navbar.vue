@@ -10,7 +10,7 @@
 
         <v-btn class="white--text" text to="/cuenta/2">Mi cuenta</v-btn>
 
-        <v-btn class="white--text" text to="/transferencias/2">Transferencias</v-btn>
+        <v-btn class="white--text" text to="/transferencias/2">Movimientos</v-btn>
 
         <v-btn class="white--text" text to="/realizarTransferencia/2">Realizar transferencia</v-btn>
 
