@@ -118,14 +118,14 @@
               margin-right: 0;" >
             <v-btn
             color="success"
-            class="mr-4"
+            class="mr-4 rounded-pill"
             @click="createTransfer"
             >
             Enviar Solicitud
             </v-btn>
             <v-btn
             color="error"
-            class="mr-4"
+            class="mr-4 rounded-pill"
             @click="reset"
             >
             Cancelar
