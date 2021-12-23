@@ -112,8 +112,8 @@
               display: block;
               font-weight: bold;
               font-size: 0.5em;
-              margin-top: 0.5em;
-              margin-bottom: 0.5em;
+              margin-top: 1em;
+              margin-bottom: 0em;
               margin-left: 0;
               margin-right: 0;" >
             <v-btn
