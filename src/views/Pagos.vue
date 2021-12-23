@@ -23,13 +23,14 @@
           <v-toolbar class="rounded-lg" dark color="#343330">
               <v-spacer />
               <v-toolbar-title>
-                <h2 style="textAlign: center"> 
+                <h2 style="textAlign:center;"> 
                  Solicitar Transferencia
                 </h2>
               </v-toolbar-title>
               <v-spacer />
+              
             </v-toolbar>
-          <v-col class="rounded-lg" col="12" style="background-color:#FFEFD2;" 
+          <v-col class="rounded-lg" col="12" style="background-color:#5A5A5A;" 
           max-width="1000" 
           max-height="1000">
             <v-form
@@ -40,17 +41,23 @@
             <v-combobox
             v-model="origen"
             :items="items"
+            class="rounded-lg"
+            style="background-color:#FFEFD2;"
             label="Cuenta de Origen"
             required
             ></v-combobox>
 
             <v-text-field
+            class="rounded-lg"
+            style="background-color:#FFEFD2;"
             label="Cuenta de Destino"
             v-model="destino"
             required
             ></v-text-field>
 
             <v-text-field
+           class="rounded-lg"
+            style="background-color:#FFEFD2;"
             label="Monto a Pagar"
             v-model="monto"
             required
@@ -67,6 +74,8 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
+                  class="rounded-lg"
+                  style="background-color:#FFEFD2;"
                   v-model="date"
                   label="Fecha de vencimiento"
                   required
