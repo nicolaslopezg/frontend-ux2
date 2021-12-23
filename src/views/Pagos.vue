@@ -20,16 +20,22 @@
     <v-layout justify-center>
       <v-flex xs6>
         <div class="text-xs-center">
-          <v-col col="12" style="background-color:#FFEFD2;" 
+          <v-toolbar class="rounded-lg" dark color="#343330">
+              <v-spacer />
+              <v-toolbar-title>
+                <h2 style="textAlign: center"> 
+                 Solicitar Transferencia
+                </h2>
+              </v-toolbar-title>
+              <v-spacer />
+            </v-toolbar>
+          <v-col class="rounded-lg" col="12" style="background-color:#FFEFD2;" 
           max-width="1000" 
           max-height="1000">
             <v-form
             ref="form"
             lazy-validation
-            >
-            <h2 style="textAlign: center"> 
-            Solicitar Transferencia
-            </h2>    
+            >  
 
             <v-combobox
             v-model="origen"
