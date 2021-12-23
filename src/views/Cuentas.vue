@@ -10,28 +10,49 @@
     <v-layout justify-center>
       <v-flex xs6 v-for="(account,index) in accounts" :key ="index">
         <div class="text-xs-center">
-          <v-col col="12" style="background-color:#DC851F;" 
+          <v-toolbar dark color="#343330">
+              <v-spacer />
+              <v-toolbar-title>
+                  <h2 style="textAlign: center"> 
+                 Cuenta  {{account.accountType}}
+                </h2>
+              </v-toolbar-title>
+              <v-spacer />
+            </v-toolbar>
+          <v-col col="12" style="background-color:#FFEFD2;" 
           max-width="1000" 
           max-height="1000">
             <v-form
             ref="form"
             lazy-validation                                      
             >
-            <v-container>
-              <v-card color="#f0c895">
-            <h2 style="textAlign: center">    
-                Cuenta {{account.accountType}}
-            </h2>
+            
+            <v-container>          
+                        <v-row no-gutters>                 
+                            <v-toolbar color="#DC851F">
+                                <v-col>
+                                <h3>Número cuenta</h3>
+                            </v-col>
+                            <v-col>
+                                <h3>Saldo</h3>
+                            </v-col>
+                            
+                        </v-toolbar>
+                            </v-row>
+                            <v-row no-gutters>
+                                <v-toolbar color="#f0c895">
+                                <v-col>
+                                <h3>{{account.accountNumber}}</h3>
+                            </v-col>
+                            <v-col>
+                                <h3>{{account.balance}}</h3>
+                            </v-col>
+                            
+                        </v-toolbar>
+                            </v-row>
 
-            <h3 >
-                Número Cuenta: {{account.accountNumber}}
-            </h3>
-
-            <h3>
-                Saldo: {{account.balance}}
-            </h3>
-              </v-card>
-            </v-container>
+                    </v-container>
+           
             
           </v-form>
         </v-col>
