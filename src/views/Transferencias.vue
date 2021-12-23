@@ -9,6 +9,15 @@
     <v-layout justify-center>
       <v-flex xs6>
         <div class="text-xs-center">
+          <v-toolbar dark color="#343330">
+              <v-spacer />
+              <v-toolbar-title>
+                  <h2 style="textAlign: center"> 
+                 Transferencias Realizadas
+                </h2>
+              </v-toolbar-title>
+              <v-spacer />
+            </v-toolbar>
           <v-col col="12" style="background-color:#FFEFD2;" 
           max-width="1000" 
           max-height="1000">
@@ -16,26 +25,42 @@
             ref="form"
             lazy-validation                                      
             >
-            <h2 style="textAlign: center">    
-                Transferencias Finalizadas
-            </h2>
             <div v-for="(transaction,index) in obtenerFinalizados" :key="index">
-            <v-container>
-                <v-card color="#f0c895">
-            <h3>
-                Tipo Cuenta: {{transaction.accountType}}
-            </h3>
-            <h3>
-                Número Cuenta Destino: {{transaction.accountDestiny}}
-            </h3> 
-            <h3>
-                Monto:  {{transaction.balance}}
-            </h3>
-            <h3>
-                Estado: {{transaction.acceptanceStatus}}
-            </h3>
-            </v-card>
-            </v-container>
+            <v-container>          
+                        <v-row no-gutters>                 
+                            <v-toolbar color="#DC851F">
+                                <v-col>
+                                <h4>Fecha</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>Monto</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>Cuenta Origen</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>Cuenta Destino</h4>
+                            </v-col>
+                        </v-toolbar>
+                            </v-row>
+                            <v-row no-gutters>
+                                <v-toolbar color="#f0c895">
+                                <v-col>
+                                <h4>{{transaction.date}}</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>{{transaction.balance}}</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>{{transaction.accountType}}</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>{{transaction.accountDestiny}}</h4>
+                            </v-col>
+                        </v-toolbar>
+
+                            </v-row>
+                    </v-container>
             </div>
             
           </v-form>
@@ -44,6 +69,15 @@
     </v-flex>
     <v-flex class="ml-5" xs6>
         <div class="text-xs-center">
+          <v-toolbar dark color="#343330">
+              <v-spacer />
+              <v-toolbar-title>
+                  <h2 style="textAlign: center"> 
+                 Transferencias Pendientes
+                </h2>
+              </v-toolbar-title>
+              <v-spacer />
+            </v-toolbar>
           <v-col col="12" style="background-color:#FFEFD2;" 
           max-width="1000" 
           max-height="1000">
@@ -51,45 +85,43 @@
             ref="form"
             lazy-validation                                      
             >
-            
-            <h2 style="textAlign: center">    
-                Transferencias Pendientes
-            </h2> 
-            <div v-for="(transaction,index) in obtenerPendientes" :key="index">
-            <v-container>
-                <v-card color="#f0c895">  
-            <h3>
-                Tipo Cuenta: {{transaction.accountType}}
-            </h3>
-            <h3>
-                Número Cuenta Destino: {{transaction.accountDestiny}}
-            </h3>
-            <h3>
-                Monto: {{transaction.balance}}
-            </h3>
-            <h3>
-                Fecha Vencimiento: {{transaction.date}}
-            </h3>
-            <h3>
-                Aprobación: {{transaction.acceptaceNumber}} / 3
-            </h3>
 
-            <h3 style="textAlign: center">
-                <v-btn
-            color="error"
-            class="mr-4"
-            >
-            Rechazar
-            </v-btn>
-            <v-btn
-            color="success"
-            class="mr-4"
-            >
-            Aprobar
-            </v-btn>    
-            </h3>
-                </v-card>
-            </v-container>
+            <div v-for="(transaction,index) in obtenerPendientes" :key="index">
+                <v-container>          
+                        <v-row no-gutters>                 
+                            <v-toolbar color="#DC851F">
+                                <v-col>
+                                <h4>Cuenta Origen</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>Cuenta Destino</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>Monto</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>Vencimiento</h4>
+                            </v-col>
+                        </v-toolbar>
+                            </v-row>
+                            <v-row no-gutters>
+                                <v-toolbar color="#f0c895">
+                                <v-col>
+                                <h4>{{transaction.accountType}}</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>{{transaction.accountDestiny}}</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>{{transaction.balance}}</h4>
+                            </v-col>
+                            <v-col>
+                                <h4>{{transaction.date}}</h4>
+                            </v-col>
+                        </v-toolbar>
+
+                            </v-row>
+                    </v-container>
             </div>
             
           </v-form>
