@@ -30,7 +30,7 @@
               <v-spacer />
               
             </v-toolbar>
-          <v-col class="rounded-lg" col="12" style="background-color:#5A5A5A;" 
+          <v-col class="rounded-lg px-4 py-1" col="12" style="background-color:#5A5A5A;" 
           max-width="1000" 
           max-height="1000">
             <v-form
@@ -41,14 +41,14 @@
             <v-combobox
             v-model="origen"
             :items="items"
-            class="rounded-lg"
+            class="rounded-lg px-4 py-1"
             style="background-color:#FFEFD2;"
             label="Cuenta de Origen"
             required
             ></v-combobox>
 
             <v-text-field
-            class="rounded-lg"
+            class="rounded-lg px-4 py-1"
             style="background-color:#FFEFD2;"
             label="Cuenta de Destino"
             v-model="destino"
@@ -56,7 +56,7 @@
             ></v-text-field>
 
             <v-text-field
-           class="rounded-lg"
+           class="rounded-lg px-4 py-1"
             style="background-color:#FFEFD2;"
             label="Monto a Pagar"
             v-model="monto"
@@ -74,7 +74,7 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  class="rounded-lg"
+                  class="rounded-lg px-4 py-1"
                   style="background-color:#FFEFD2;"
                   v-model="date"
                   label="Fecha de vencimiento"
@@ -120,6 +120,7 @@
             color="success"
             class="mr-4 rounded-pill"
             @click="createTransfer"
+            type="reset"
             onclick="alert('¡Envío de solicitud realizada!')"
             >
             Enviar Solicitud
@@ -192,18 +193,15 @@ export default {
     });
     },
     async createTransfer() {
-    /*  const q = query(collection(db, "accounts"), where("accountNumber", "==", parseInt(this.destino)));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        this.idDestino = parseInt(doc.id);
-        console.log(doc.id, " => ", doc.data());
-      });*/
       console.log(this.origen.value);
       console.log(this.destino);
       console.log(this.monto);
       console.log(this.date);
-      await setDoc(doc(db, "transfers","80"), {
+      const q = query(
+      collection(db, "transfers")
+      );
+      console.log(q);
+      await setDoc(doc(db, "transfers/"+Math.random().toString(36).substr(2, 9)), {
       acceptaceNumber: 0,
       acceptanceStatus: "rechazado",
       accountType: this.origen.value,

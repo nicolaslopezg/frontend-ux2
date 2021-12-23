@@ -17,27 +17,6 @@
             ref="form"
             lazy-validation                                      
             >
-            <v-toolbar dark color="#343330">
-              <v-spacer />
-              <v-toolbar-title>
-                  <h3 style="textAlign: center"> 
-                 Cuenta {{account.accountType}}
-                </h3>
-              </v-toolbar-title>
-              <v-spacer />
-            </v-toolbar>
-
-            <v-toolbar color="#FFEFD2">
-              <v-spacer />
-              <v-toolbar-title>
-                  <h4 style="textAlign: center"> 
-                 Saldo: {{account.balance}}
-                </h4>
-              </v-toolbar-title>
-              <v-spacer />
-            </v-toolbar>
-            
-            <!--
             <v-container>
               <v-card color="#f0c895">
             <h2 style="textAlign: center">    
@@ -53,7 +32,7 @@
             </h3>
               </v-card>
             </v-container>
-            -->
+            
           </v-form>
         </v-col>
       </div>

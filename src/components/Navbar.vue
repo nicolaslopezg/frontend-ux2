@@ -4,7 +4,7 @@
       <v-app-bar-nav-icon @click = "drawer = !drawer"></v-app-bar-nav-icon>
 
         
-        <v-btn class="white--text" text to="/">Devance</v-btn>
+        <v-btn class="white--text" text to="/2">Devance</v-btn>
 
         <v-spacer>
 

@@ -60,6 +60,12 @@
                         </v-toolbar>
 
                             </v-row>
+                            <v-row no-gutters>
+                                <v-toolbar color="#f0c895">
+                                    <h4>Estado: {{transaction.acceptanceStatus}}
+                                    </h4>
+                                </v-toolbar>
+                            </v-row>
                     </v-container>
             </div>
             
@@ -122,16 +128,16 @@
                             </v-row>
                             <v-row no-gutters>
                                 <v-toolbar color="#f0c895">
-                                    <h4>Aprobaciones: {{transaction.acceptaceNumber}} / 3
+                                    <h4>Aprobaciones: {{transaction.acceptaceNumber}} / 1
                                     </h4>
                                     <v-col align="right">
-                                    <v-btn
+                                    <v-btn @click="deleteTransfer(transaction.id)"
                                         color="error"
                                         class="mr-4"
                                         >
                                         Rechazar
                                     </v-btn>
-                                    <v-btn
+                                    <v-btn @click="approveTransfer(transaction.id)"
                                         color="success"
                                         class="mr-4"
                                         >
@@ -161,7 +167,6 @@
             <h3>
                 Aprobación: {{transaction.acceptaceNumber}} / 3
             </h3>
-
             <h3 style="textAlign: center">
                 <v-btn
             color="error"
@@ -204,7 +209,7 @@
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 import{db} from "../main.js";
 export default {
     name: 'Factura',
@@ -238,6 +243,22 @@ export default {
         
     },
     methods: {
+    async approveTransfer(transaccion){
+        await updateDoc(doc(db, "transfers",transaccion), {
+            acceptanceNumber: 1,
+            acceptanceStatus: "aprobada",
+            transferStatus: "finalizada",
+        })
+        window.location.reload();
+    },
+
+    async deleteTransfer(transaccion){
+        await updateDoc(doc(db, "transfers",transaccion), {
+            transferStatus: "finalizada",
+        })
+        window.location.reload();
+    },
+
     async getTransactions() {
         const querySnapshot = await getDocs(
             collection(db, "transfers")
