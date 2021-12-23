@@ -108,7 +108,14 @@
               </v-date-picker>
             </v-menu>
 
-            <h3 style="textAlign: center">
+            <h3 style="textAlign: center;
+              display: block;
+              font-weight: bold;
+              font-size: 0.5em;
+              margin-top: 0.5em;
+              margin-bottom: 0.5em;
+              margin-left: 0;
+              margin-right: 0;" >
             <v-btn
             color="success"
             class="mr-4"
