@@ -20,15 +20,22 @@
             <v-col >
               <v-toolbar dark color="#343330">
                 <v-toolbar-title>
-                  <h2 style="textAlign: center"> 
-                 Chat
-                </h2>
+                  <h4 class="text-center">
+                    CHAT
+                  </h4>
                 </v-toolbar-title>
               </v-toolbar>
               <v-card-text class="chatbox">
-                <v-list ref="chat" id="logs" color="#f0c895" :style="{minHeight: '200px'}">
+                <v-list ref="chat" id="logs" color="#FFFFFF" :style="{minHeight: '200px'}">
                   <template v-for="(mensaje, index) in logs" >
-                    <v-subheader v-if="mensaje" :key="index">{{mensaje.text}}</v-subheader>
+                    <v-subheader v-if="mensaje" :key="index">
+                        
+                          <v-icon >
+                            mdi-account-circle
+                          </v-icon>
+                        
+                        {{ mensaje.text}}
+                    </v-subheader>
                   </template>
                 </v-list>
               </v-card-text>

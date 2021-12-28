@@ -13,13 +13,13 @@
           <v-toolbar dark color="#343330">
               <v-spacer />
               <v-toolbar-title>
-                  <h2 style="textAlign: center"> 
-                 Cuenta  {{account.accountType}}
-                </h2>
+                  <h4 style="textAlign: center"> 
+                     CUENTA {{account.accountType.toUpperCase()}} <v-icon>mdi-card-bulleted</v-icon> 
+                  </h4>
               </v-toolbar-title>
               <v-spacer />
             </v-toolbar>
-          <v-col col="12" style="background-color:#FFEFD2;" 
+          <v-col col="12" style="background-color:#5A5A5A;" 
           max-width="1000" 
           max-height="1000">
             <v-form
@@ -28,30 +28,25 @@
             >
             
             <v-container>          
-                        <v-row no-gutters>                 
-                            <v-toolbar color="#DC851F">
-                                <v-col>
-                                <h3>Número cuenta</h3>
-                            </v-col>
-                            <v-col>
-                                <h3>Saldo</h3>
-                            </v-col>
-                            
-                        </v-toolbar>
-                            </v-row>
-                            <v-row no-gutters>
-                                <v-toolbar color="#f0c895">
-                                <v-col>
-                                <h3>{{account.accountNumber}}</h3>
-                            </v-col>
-                            <v-col>
-                                <h3>{{account.balance}}</h3>
-                            </v-col>
-                            
-                        </v-toolbar>
-                            </v-row>
+              <v-row no-gutters>                 
+                <v-toolbar color="#818181" dark>
+                  <v-col>
+                    <v-icon>mdi-credit-card</v-icon> Número de Cuenta: {{account.accountNumber}}
+                   </v-col>    
+                </v-toolbar>
+              </v-row>
+              <v-row no-gutters>
+                <v-toolbar color="#818181" dark>
+                  <v-col>
+                    <v-icon>mdi-cash</v-icon>  Saldo: 
+                    <p style="display:inline" v-if="account.accountType == 'Corriente'">CLP$</p>
+                    <p style="display:inline" v-if="account.accountType == 'Tiempo'">Cabildo</p> 
+                    {{account.balance}}
+                  </v-col>            
+                </v-toolbar>
+              </v-row>
 
-                    </v-container>
+            </v-container>
            
             
           </v-form>

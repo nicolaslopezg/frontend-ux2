@@ -12,61 +12,54 @@
           <v-toolbar dark color="#343330">
               <v-spacer />
               <v-toolbar-title>
-                  <h2 style="textAlign: center"> 
-                 Transferencias Realizadas
-                </h2>
+                <h4 style="textAlign: center"> 
+                    TRANSFERENCIAS REALIZADAS <v-icon>mdi-calendar-check</v-icon>
+                </h4>
               </v-toolbar-title>
               <v-spacer />
             </v-toolbar>
-          <v-col col="12" style="background-color:#FFEFD2;" 
-          max-width="1000" 
-          max-height="1000">
+          <v-col col="12" style="background-color:#343330;" 
+             max-width="1000" 
+             max-height="1000">
             <v-form
             ref="form"
             lazy-validation                                      
             >
-            <div v-for="(transaction,index) in obtenerFinalizados" :key="index">
-            <v-container>          
-                        <v-row no-gutters>                 
-                            <v-toolbar color="#DC851F">
-                                <v-col>
-                                <h4>Fecha</h4>
+            <div v-for="(transaction,index) in obtenerFinalizados" :key="index" dark>
+                <v-container >          
+                    <v-row v-bind:style="setColor(transaction.acceptanceStatus)? {'border-left': '6px solid green','height': 'auto'}:{'border-left': '6px solid red','height': 'auto'}" no-gutters>                 
+                        <v-toolbar color="#5A5A5A" dark>
+                            <v-col cols="6">
+                                <v-icon>mdi-card-account-details</v-icon> Cuenta Origen: {{transaction.accountType}}
                             </v-col>
-                            <v-col>
-                                <h4>Monto</h4>
-                            </v-col>
-                            <v-col>
-                                <h4>Cuenta Origen</h4>
-                            </v-col>
-                            <v-col>
-                                <h4>Cuenta Destino</h4>
+                            <v-col cols="6">
+                                <v-icon>mdi-card-account-details</v-icon> Cuenta Destino: {{transaction.accountDestiny}}
                             </v-col>
                         </v-toolbar>
-                            </v-row>
-                            <v-row no-gutters>
-                                <v-toolbar color="#f0c895">
-                                <v-col>
-                                <h4>{{transaction.date}}</h4>
+                    </v-row>
+                    <v-row v-bind:style="setColor(transaction.acceptanceStatus)? {'border-left': '6px solid green','height': 'auto'}:{'border-left': '6px solid red','height': 'auto'}" no-gutters>
+                        <v-toolbar color="#5A5A5A" dark>
+                            <v-col>
+                                <v-icon>mdi-calendar</v-icon> Fecha: {{transaction.date}}
                             </v-col>
                             <v-col>
-                                <h4>{{transaction.balance}}</h4>
-                            </v-col>
-                            <v-col>
-                                <h4>{{transaction.accountType}}</h4>
-                            </v-col>
-                            <v-col>
-                                <h4>{{transaction.accountDestiny}}</h4>
+                                <v-icon>mdi-cash</v-icon> Monto: 
+                                <p style="display:inline" v-if="transaction.accountType == 'Corriente'">CLP$</p>
+                                <p style="display:inline" v-if="transaction.accountType == 'Tiempo'">Cabildo</p>  
+                                {{transaction.balance}}
                             </v-col>
                         </v-toolbar>
-
-                            </v-row>
-                            <v-row no-gutters>
-                                <v-toolbar color="#f0c895">
-                                    <h4>Estado: {{transaction.acceptanceStatus}}
-                                    </h4>
-                                </v-toolbar>
-                            </v-row>
-                    </v-container>
+                    </v-row>
+                    <v-row v-bind:style="setColor(transaction.acceptanceStatus)? {'border-left': '6px solid green','height': 'auto'}:{'border-left': '6px solid red','height': 'auto'}" no-gutters>
+                        <v-toolbar color="#5A5A5A" dark>
+                            <v-col>
+                                <v-icon color="green" v-if="transaction.acceptanceStatus == 'aprobada'"> mdi-check-circle </v-icon>
+                                <v-icon color="red" v-if="transaction.acceptanceStatus == 'rechazado'">mdi-close-circle</v-icon> 
+                                Estado: {{transaction.acceptanceStatus}}
+                            </v-col>
+                        </v-toolbar>
+                    </v-row>
+                </v-container>
             </div>
             
           </v-form>
@@ -78,13 +71,13 @@
           <v-toolbar dark color="#343330">
               <v-spacer />
               <v-toolbar-title>
-                  <h2 style="textAlign: center"> 
-                 Transferencias Pendientes
-                </h2>
+                  <h4 style="textAlign: center"> 
+                 TRANSFERENCIAS PENDIENTES <v-icon>mdi-calendar-clock</v-icon>
+                </h4>
               </v-toolbar-title>
               <v-spacer />
             </v-toolbar>
-          <v-col col="12" style="background-color:#FFEFD2;" 
+          <v-col col="12" style="background-color:#343330;" 
           max-width="1000" 
           max-height="1000">
             <v-form
@@ -95,42 +88,31 @@
             <div v-for="(transaction,index) in obtenerPendientes" :key="index">
                 <v-container>          
                         <v-row no-gutters>                 
-                            <v-toolbar color="#DC851F">
+                            <v-toolbar color="#5A5A5A" dark>
                                 <v-col>
-                                <h4>Cuenta Origen</h4>
-                            </v-col>
-                            <v-col>
-                                <h4>Cuenta Destino</h4>
-                            </v-col>
-                            <v-col>
-                                <h4>Monto</h4>
-                            </v-col>
-                            <v-col>
-                                <h4>Vencimiento</h4>
-                            </v-col>
-                        </v-toolbar>
-                            </v-row>
-                            <v-row no-gutters>
-                                <v-toolbar color="#f0c895">
+                                    <v-icon>mdi-card-account-details</v-icon> Cuenta Origen: {{transaction.accountType}}
+                                </v-col>
                                 <v-col>
-                                <h4>{{transaction.accountType}}</h4>
-                            </v-col>
-                            <v-col>
-                                <h4>{{transaction.accountDestiny}}</h4>
-                            </v-col>
-                            <v-col>
-                                <h4>{{transaction.balance}}</h4>
-                            </v-col>
-                            <v-col>
-                                <h4>{{transaction.date}}</h4>
-                            </v-col>
-                        </v-toolbar>
-                            </v-row>
-                            <v-row no-gutters>
-                                <v-toolbar color="#f0c895">
-                                    <h4>Aprobaciones: {{transaction.acceptaceNumber}} / 1
-                                    </h4>
-                                    <v-col align="right">
+                                    <v-icon>mdi-card-account-details</v-icon> Cuenta Destino: {{transaction.accountDestiny}}
+                                </v-col>
+                            </v-toolbar>
+                        </v-row>
+                        <v-row no-gutters>
+                            <v-toolbar color="#5A5A5A" dark>
+                                <v-col>
+                                    <v-icon>mdi-calendar</v-icon> Fecha: {{transaction.date}}
+                                </v-col>
+                                <v-col>
+                                    <v-icon>mdi-cash</v-icon> Monto: 
+                                    <p style="display:inline" v-if="transaction.accountType == 'Corriente'">CLP$</p>
+                                    <p style="display:inline" v-if="transaction.accountType == 'Tiempo'">Cabildo</p>
+                                    {{transaction.balance}}
+                                </v-col>
+                            </v-toolbar>
+                        </v-row>
+                        <v-row no-gutters>
+                            <v-toolbar color="#5A5A5A" dark>
+                                <v-col align="center">
                                     <v-btn @click="deleteTransfer(transaction.id)"
                                         color="error"
                                         class="mr-4"
@@ -141,11 +123,11 @@
                                         color="success"
                                         class="mr-4"
                                         >
-                                        Aprobar
+                                        Aprobar {{transaction.acceptaceNumber}} / 1
                                     </v-btn>   
-                                    </v-col>
-                                </v-toolbar>
-                            </v-row>
+                                </v-col>
+                            </v-toolbar>
+                        </v-row>
                     </v-container>
 
 
@@ -218,7 +200,8 @@ export default {
         return{
             users: [],
             pendiente: [],
-            transactions: [], 
+            transactions: [],
+            aprobado: false 
         }
         
     },
@@ -277,6 +260,24 @@ export default {
             console.log(error);
         }
     },
+    setColor: function (state) {
+        if (state === 'aprobada') {
+            return true
+        }
+        else {
+            return false
+        }
+    },
+    showCardNumber: function (cardNumber) {
+        var stringCard = cardNumber.toString()
+        var fillNumbers = ''
+        var remainLength = 16 - stringCard.length
+        for (var i = 0; i < remainLength; i++) {
+            fillNumbers.concat('0')
+        }
+        fillNumbers.concat(stringCard)
+        return fillNumbers
+    }
     },
     
     components: {
@@ -286,3 +287,9 @@ export default {
     
   }
 </script>
+<style scoped>
+#aprobado{
+    border-left: 6px solid green;
+    height: auto ;
+}
+</style>
