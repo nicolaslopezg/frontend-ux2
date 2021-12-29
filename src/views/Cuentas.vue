@@ -39,8 +39,8 @@
                 <v-toolbar color="#818181" dark>
                   <v-col>
                     <v-icon>mdi-cash</v-icon>  Saldo: 
-                    <p style="display:inline" v-if="account.accountType == 'Corriente'">CLP$</p>
-                    <p style="display:inline" v-if="account.accountType == 'Tiempo'">Cabildo</p> 
+                    <p style="display:inline" v-if="account.accountType == 'Corriente'">CLP $</p>
+                    <p style="display:inline" v-if="account.accountType == 'Tiempo'">Cabildo </p> 
                     {{account.balance}}
                   </v-col>            
                 </v-toolbar>

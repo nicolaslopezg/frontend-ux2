@@ -44,8 +44,8 @@
                             </v-col>
                             <v-col>
                                 <v-icon>mdi-cash</v-icon> Monto: 
-                                <p style="display:inline" v-if="transaction.accountType == 'Corriente'">CLP$</p>
-                                <p style="display:inline" v-if="transaction.accountType == 'Tiempo'">Cabildo</p>  
+                                <p style="display:inline" v-if="transaction.accountType == 'Corriente'">CLP $</p>
+                                <p style="display:inline" v-if="transaction.accountType == 'Tiempo'">Cabildo </p>  
                                 {{transaction.balance}}
                             </v-col>
                         </v-toolbar>
@@ -113,18 +113,39 @@
                         <v-row no-gutters>
                             <v-toolbar color="#5A5A5A" dark>
                                 <v-col align="center">
-                                    <v-btn @click="deleteTransfer(transaction.id)"
-                                        color="error"
-                                        class="mr-4"
-                                        >
-                                        Rechazar
-                                    </v-btn>
-                                    <v-btn @click="approveTransfer(transaction.id)"
-                                        color="success"
-                                        class="mr-4"
-                                        >
-                                        Aprobar {{transaction.acceptaceNumber}} / 1
-                                    </v-btn>   
+                                    <v-dialog transition="dialog-top-transition" max-width="600">
+                                        <template v-slot:activator="{on}">
+                                            <v-btn v-on="on"
+                                            color="error"
+                                            class="mr-4"
+                                            >
+                                                Rechazar
+                                            </v-btn>
+                                            <v-btn v-on="on"
+                                            color="success"
+                                            class="mr-4"
+                                            >
+                                                Aprobar {{transaction.acceptaceNumber}} / 1
+                                            </v-btn>
+                                        </template>
+                                        
+                                        <v-card-title class="justify-center" style="background-color:#343330">
+                                            <h4 style="color:#FFFFFF">¿Está seguro que desea <strong>Aprobar/Rechazar</strong> la transferencia?</h4>
+                                        </v-card-title>
+                                        <v-card-text style="background-color:#5A5A5A">
+                                            <v-container>
+                                                <v-col align="center">
+                                                    <v-btn @click="deleteTransfer(transaction.id)" color="error" class="mr-4">
+                                                    Rechazar
+                                                    </v-btn>
+                                                    <v-btn @click="approveTransfer(transaction.id)" color="success" class="mr-4">
+                                                    Aprobar {{transaction.acceptaceNumber}} / 1
+                                                    </v-btn>
+                                                </v-col>
+                                            </v-container>  
+                                        </v-card-text>
+                                    </v-dialog>
+                                       
                                 </v-col>
                             </v-toolbar>
                         </v-row>
@@ -201,7 +222,8 @@ export default {
             users: [],
             pendiente: [],
             transactions: [],
-            aprobado: false 
+            aprobado: false,
+            aprobar: false
         }
         
     },
@@ -287,9 +309,3 @@ export default {
     
   }
 </script>
-<style scoped>
-#aprobado{
-    border-left: 6px solid green;
-    height: auto ;
-}
-</style>
