@@ -107,8 +107,66 @@
                 </v-btn>
               </v-date-picker>
             </v-menu>
+                <v-toolbar color="#5A5A5A" dark>
+                    <v-col align="center">
+                        <v-dialog transition="dialog-top-transition" max-width="600">
+                            <template v-slot:activator="{on}">
+                                <v-btn v-on="on"
+                                color="error"
+                                class="mr-4"
+                                >
+                                    Cancelar
+                                </v-btn>
+                            </template>
+                            
+                            <v-card-title class="justify-center" style="background-color:#343330">
+                                <h4 style="color:#FFFFFF">¿Está seguro que desea <strong>Cancelar</strong> la transferencia?</h4>
+                            </v-card-title>
+                            <v-card-text style="background-color:#5A5A5A">
+                                <v-container>
+                                    <v-col align="center">
+                                        <v-btn @click="reset" type="reset" color="error" class="mr-4" onclick="alert('¡Solicitud de transferencia cancelada!')">
+                                        Si
+                                        </v-btn>
+                                        <v-btn color="success" class="mr-4">
+                                        No 
+                                        </v-btn>
+                                    </v-col>
+                                </v-container>  
+                            </v-card-text>
+                        </v-dialog>
 
-            <h3 style="textAlign: center;
+                        <v-dialog transition="dialog-top-transition" max-width="600">
+                            <template v-slot:activator="{on}">
+    
+                                <v-btn v-on="on"
+                                color="success"
+                                class="mr-4"
+                                >
+                                    Enviar Solicitud
+                                </v-btn>
+                            </template>
+                            
+                            <v-card-title class="justify-center" style="background-color:#343330">
+                                <h4 style="color:#FFFFFF">¿Está seguro que desea <strong>Enviar Solicitud</strong> de la transferencia?</h4>
+                            </v-card-title>
+                            <v-card-text style="background-color:#5A5A5A">
+                                <v-container>
+                                    <v-col align="center">
+                                        <v-btn color="error" class="mr-4">
+                                        No
+                                        </v-btn>
+                                        <v-btn @click="createTransfer" type="reset" color="success" class="mr-4" onclick="alert('¡Envío de solicitud realizada!')">
+                                        Si 
+                                        </v-btn>
+                                    </v-col>
+                                </v-container>  
+                            </v-card-text>
+                        </v-dialog>
+                            
+                    </v-col>
+                </v-toolbar>
+            <!--<h3 style="textAlign: center;
               display: block;
               font-weight: bold;
               font-size: 0.5em;
@@ -134,7 +192,7 @@
             >
             Cancelar
             </v-btn>
-            </h3>
+            </h3>-->
             
           </v-form>
         </v-col>
@@ -211,7 +269,7 @@ export default {
       idUserOrigin: 1,
       transferStatus: "pendiente",
       });
-    
+      window.location.reload();
     },
 
     async loadUser() {
