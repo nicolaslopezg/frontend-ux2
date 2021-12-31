@@ -26,15 +26,24 @@
                 </v-toolbar-title>
               </v-toolbar>
               <v-card-text class="chatbox">
-                <v-list ref="chat" id="logs" color="#FFFFFF" :style="{minHeight: '200px'}">
+                <v-list class="rounded-lg" ref="chat" id="logs" color="#FFFFFF" :style="{minHeight: '200px'}">
                   <template v-for="(mensaje, index) in logs" >
-                    <v-subheader v-if="mensaje" :key="index">
-                        
+                    <v-subheader v-if="mensaje" :key="index" >
                           <v-icon >
                             mdi-account-circle
                           </v-icon>
-                        
-                        {{ mensaje.text}}
+                        <div class="rounded-lg px-4 py-1" style="background-color:#D7D7D7;" v-if="index===1">
+                          {{ mensaje.text}}
+                        </div>
+                        <div class="rounded-lg px-4 py-1" style="background-color:#FFAE7F;" v-else-if="index===2">
+                          {{ mensaje.text}}
+                        </div>
+                        <div class="rounded-lg px-4 py-1" style="background-color:#7FFFFC;" v-else-if="index===3">
+                          {{ mensaje.text}}
+                        </div>
+                        <div class="rounded-lg px-4 py-1" style="background-color:#C0FFCA;" v-else>
+                          {{ mensaje.text}}
+                        </div>
                     </v-subheader>
                   </template>
                 </v-list>
