@@ -41,14 +41,14 @@
             <v-combobox
             v-model="origen"
             :items="items"
-            class="rounded-lg px-4 py-1"
+            class="rounded-lg px-4"
             style="background-color:#FFFFFF;"
             label="Cuenta de Origen"
             required
             ></v-combobox>
 
             <v-text-field
-            class="rounded-lg px-4 py-1"
+            class="rounded-lg px-4"
             style="background-color:#FFFFFF;"
             label="Cuenta de Destino"
             v-model="destino"
@@ -56,9 +56,10 @@
             ></v-text-field>
 
             <v-text-field
-           class="rounded-lg px-4 py-1"
+           class="rounded-lg px-4"
             style="background-color:#FFFFFF;"
             label="Monto a Pagar"
+            placeholder="$"
             v-model="monto"
             required
             ></v-text-field>
@@ -74,7 +75,7 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  class="rounded-lg px-4 py-1"
+                  class="rounded-lg px-4"
                   style="background-color:#FFFFFF;"
                   v-model="date"
                   label="Fecha de vencimiento"
