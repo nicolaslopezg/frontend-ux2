@@ -16,6 +16,8 @@
 
          <v-btn class="white--text" text to="/chat/2">Chats</v-btn>
 
+         <v-btn class="white--text" text to="/ayuda/2">Ayuda</v-btn>
+
         </v-spacer>
 
         <p class="mt-4 mr-4 headline">{{user.name}}</p>

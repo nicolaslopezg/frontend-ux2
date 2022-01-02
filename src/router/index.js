@@ -6,6 +6,7 @@ import Cuenta from '../views/Cuentas.vue'
 import Factura from '../views/Transferencias.vue'
 import Pago from '../views/Pagos.vue'
 import Chat from '../views/Chat.vue'
+import Ayuda from '../views/Ayuda.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/chat/:id',
     name: 'Chats',
     component: Chat
+  },
+  {
+    path: '/ayuda/:id',
+    name: 'Ayuda',
+    component: Ayuda
   }
 ]
 
